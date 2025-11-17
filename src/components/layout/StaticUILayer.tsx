@@ -7,6 +7,7 @@ export type StaticUILayerProps = {
   totalSteps?: number;
   onClose?: () => void;
   showOnPages?: ('patient-selection' | 'quiz-pages' | 'all')[];
+  showClose?: boolean;
 };
 
 /**
@@ -26,6 +27,7 @@ export default function StaticUILayer({
   totalSteps = 4,
   onClose,
   showOnPages: _showOnPages = ['quiz-pages'],
+  showClose = true,
 }: StaticUILayerProps) {
   const handleClose = () => {
     if (onClose) {
@@ -51,10 +53,12 @@ export default function StaticUILayer({
               aria-label={`Step ${currentStep} of ${totalSteps}`}
               disableAnimation={true}
             />
-            <CloseGrey
-              className={sharedStyles.closeButton}
-              onClick={handleClose}
-            />
+            {showClose && (
+              <CloseGrey
+                className={sharedStyles.closeButton}
+                onClick={handleClose}
+              />
+            )}
           </div>
         </div>
       )}

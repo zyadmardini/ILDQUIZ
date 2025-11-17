@@ -107,8 +107,12 @@ export default function PatientSelection({
       }
     };
 
-    // Check on mount and resize
-    checkShowAllPatients();
+    // Delay initial check to ensure CSS is fully loaded (production fix)
+    const timeoutId = setTimeout(() => {
+      checkShowAllPatients();
+    }, 100);
+
+    // Check on resize
     window.addEventListener('resize', checkShowAllPatients);
     
     // Use ResizeObserver for more accurate detection
@@ -120,6 +124,7 @@ export default function PatientSelection({
     }
 
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener('resize', checkShowAllPatients);
       if (resizeObserver && currentRef) {
         resizeObserver.unobserve(currentRef);

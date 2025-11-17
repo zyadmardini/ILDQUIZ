@@ -14,8 +14,8 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr;
-  /* Use minmax(0, 1fr) for main content row to allow shrinking below content size */
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  /* Use auto for top/bottom spacers and minmax for content for proper vertical centering */
+  grid-template-rows: auto auto 1fr auto;
   gap: clamp(10px, 1.5vw, var(--gap-medium));
   padding: clamp(20px, 2.5vh, var(--spacing-lg)) 
            clamp(40px, 3vw, var(--spacing-xl));
@@ -25,8 +25,8 @@
   overflow: hidden;
   z-index: 1;
   /* Ensure viewport is established before calculations */
-  min-width: 100vw;
-  min-height: 100vh;
+  min-width: 0;
+  min-height: 0;
 }
 
 .frame.transitioning {
@@ -139,16 +139,13 @@
   grid-template-columns: auto 1fr auto;
   grid-template-rows: 1fr;
   gap: clamp(10px, 1.5vw, var(--gap-medium));
-  align-items: start;
+  align-items: center;
   justify-items: center;
   position: relative;
   z-index: 2;
   width: 100%;
   height: 100%;
-  /* Critical for grid children to allow shrinking below content size */
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
+  min-height: clamp(500px, 65vh, 750px);
 }
 
 /* When showing all 4 patients, remove arrow columns */
@@ -188,29 +185,32 @@
   grid-column: 2;
   grid-row: 1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(clamp(150px, 20vw, 200px), 1fr));
-  gap: clamp(10px, 1.5vw, var(--gap-medium));
+  /* Equal width columns - each 1fr means equal size */
+  grid-template-columns: repeat(3, 1fr);
+  /* Equal height rows for consistent card heights */
+  grid-template-rows: 1fr;
+  gap: clamp(15px, 2vw, 20px);
   width: 100%;
-  max-width: clamp(500px, 80vw, 900px);
-  height: 100%;
+  max-width: clamp(700px, 85vw, 1000px);
+  /* Auto height to accommodate full images */
+  height: auto;
+  /* Stretch items vertically, center horizontally */
   align-items: stretch;
   justify-items: center;
-  padding: clamp(10px, 1.5vw, 15px);
-  /* Critical for grid children to allow shrinking */
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
+  padding: 0;
 }
 
 /* When showing all 4 patients, use 4 columns */
 .patientsGrid.patientsGridAll {
   grid-column: 1;
-  grid-template-columns: repeat(4, minmax(clamp(200px, 18vw, 280px), 1fr));
+  /* Equal width columns - each 1fr means equal size */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
   max-width: 100%;
-  gap: clamp(15px, 2vw, var(--gap-medium));
+  gap: clamp(15px, 2vw, 25px);
   justify-items: center;
   align-items: stretch;
-  height: 100%;
+  height: auto;
 }
 
 /* =========================================================================
@@ -223,13 +223,14 @@
   align-items: center;
   justify-content: flex-start;
   gap: clamp(8px, 1.2vw, var(--gap-medium));
+  /* Restore narrower width */
   width: 100%;
-  max-width: clamp(150px, 20vw, 280px);
+  max-width: clamp(200px, 22vw, 280px);
+  /* Force equal heights for all cards */
   height: 100%;
   opacity: 0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: scale(0.9);
-  align-self: stretch;
+  transition: opacity 0.3s ease;
+  /* REMOVED transform: scale(0.9) - this was causing size differences */
 }
 
 .patientCard:focus-within {
@@ -241,13 +242,13 @@
 /* Center card is fully visible (carousel mode) */
 .patientCardCenter {
   opacity: 1;
-  transform: scale(1);
+  /* REMOVED transform: scale(1) - keeping all cards same size */
 }
 
 /* When showing all patients, all cards are fully visible */
 .patientsGridAll .patientCard {
   opacity: 1;
-  transform: scale(1);
+  /* REMOVED transform - keeping all cards same size */
 }
 
 /* =========================================================================
@@ -266,7 +267,8 @@
   flex-shrink: 0;
   text-align: center;
   width: 100%;
-  height: auto;
+  /* Fixed height for title section */
+  height: clamp(60px, 10vh, 80px);
   gap: 0;
 }
 
@@ -295,9 +297,10 @@
    ========================================================================= */
 
 .patientImageContainer {
+  /* Take full card width for consistent sizing */
   width: 100%;
-  max-width: clamp(150px, 20vw, 280px);
-  aspect-ratio: 9 / 14;
+  /* Use aspect ratio instead of fixed height to avoid cropping */
+  aspect-ratio: 280 / 437;
   position: relative;
   flex-shrink: 0;
   overflow: hidden;
@@ -330,14 +333,16 @@
   line-height: normal;
   font-style: normal;
   position: relative;
-  flex-shrink: 0;
+  flex-shrink: 1; /* Allow shrinking if needed */
   text-align: center;
-  font-size: clamp(14px, 1.3vw, 20px);
+  font-size: clamp(14px, 1.3vw, 18px);
   color: var(--color-text-primary);
   width: 100%;
+  /* Auto height to show all text */
   height: auto;
+  min-height: clamp(45px, 7vh, 65px);
   line-height: 1.4;
-  flex-grow: 1;
+  flex-grow: 0; /* Don't grow */
 }
 
 .patientDescription p {
@@ -351,10 +356,10 @@
    ========================================================================= */
 
 .quizButton {
+  /* Take full card width for consistent sizing */
   width: 100%;
-  max-width: clamp(140px, 18vw, 280px);
-  min-height: clamp(50px, 7vh, 69px);
-  height: auto;
+  /* Fixed height for consistent button positioning */
+  height: clamp(60px, 8vh, 75px);
   background-color: var(--color-background-white);
   border: clamp(2px, 0.3vw, 3px) solid var(--color-accent-primary);
   border-radius: 0;
@@ -365,15 +370,15 @@
   flex-shrink: 0;
   box-sizing: border-box;
   padding: clamp(8px, 1vw, 10px);
-  gap: clamp(8px, 1vw, 10px);
+  gap: clamp(6px, 0.8vw, 8px);
   position: relative;
   transition: all 0.2s ease;
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-bold);
-  font-size: clamp(12px, 1.1vw, 16px);
+  font-size: clamp(12px, 1.1vw, 15px);
   color: var(--color-accent-primary);
-  margin: 0 auto;
-  margin-top: auto;
+  margin: 0;
+  margin-top: auto; /* Push to bottom */
 }
 
 .quizButtonContent {
@@ -453,14 +458,14 @@
 @media (min-width: 480px) and (max-width: 768px) {
   .frame {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto 1fr auto;
     gap: clamp(8px, 1vw, 12px);
     padding: clamp(15px, 2vh, 20px) clamp(30px, 2.5vw, 40px);
   }
 
   .carouselContainer {
     gap: clamp(8px, 1vw, 10px);
-    min-height: 0;
+    height: auto;
   }
 
   .patientsGrid {

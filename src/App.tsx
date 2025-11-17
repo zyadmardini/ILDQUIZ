@@ -200,6 +200,7 @@ function App() {
         currentStep={showStaticUI ? currentStep : undefined}
         totalSteps={4}
         onClose={handleClose}
+        showClose={currentPage !== 'patient-selection'}
       />
 
       <PageTransition
