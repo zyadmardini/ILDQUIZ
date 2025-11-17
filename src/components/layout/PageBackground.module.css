@@ -1,0 +1,34 @@
+/* =========================================================================
+   PageBackground Component - Shared Background for All Pages
+   
+   This component provides a consistent background treatment used
+   across all pages in the application.
+   
+   Features:
+   - Responsive and fullscreen compatible
+   - Z-index: 0 (behind all content)
+   - Object-fit: cover (maintains aspect ratio)
+   - Pointer-events: none (doesn't interfere with interactions)
+   ========================================================================= */
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  pointer-events: none;
+}
+

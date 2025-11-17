@@ -1,0 +1,57 @@
+/**
+ * Design Token CSS Variables
+ * These variables can be used in CSS Modules and regular CSS
+ */
+
+:root {
+  /* Colors */
+  --color-background-primary: #929292;
+  --color-background-secondary: #c9c9c9;
+  --color-background-overlay: rgba(217, 217, 217, 0.43);
+  --color-background-dark: #1e1e1e;
+  --color-background-white: #ffffff;
+  
+  --color-accent-primary: #f2664f;
+  --color-accent-pressed: #f39a8c;
+  
+  --color-text-primary: #1e1e1e;
+  --color-text-secondary: #ffffff;
+  --color-text-accent: #f2664f;
+
+  /* Typography */
+  --font-family-primary: 'Helvetica Neue', sans-serif;
+  --font-family-display: 'Krona One', sans-serif;
+  
+  --font-size-display: 29px;
+  --font-size-heading-large: 25px;
+  --font-size-heading-medium: 24px;
+  --font-size-body-large: 23px;
+  --font-size-body-medium: 21px;
+  --font-size-body-small: 20px;
+  --font-size-body-xsmall: 19px;
+  --font-size-caption: 18px;
+  --font-size-icon: 42px;
+  
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  --line-height-normal: normal;
+  --line-height-tight: 0;
+
+  /* Spacing */
+  --spacing-xs: 3px;
+  --spacing-sm: 9px;
+  --spacing-md: 14px;
+  --spacing-lg: 26px;
+  --spacing-xl: 54px;
+  
+  --gap-small: 10px;
+  --gap-medium: 15px;
+  --gap-large: 16px;
+
+  /* Borders */
+  --border-radius-standard: 25px;
+  --border-width-button: 3px;
+}
+

@@ -1,0 +1,362 @@
+/* =========================================================================
+   Shared Quiz Page Layout Styles
+   
+   Used by all patient quiz pages (intro, quiz, results)
+   Provides consistent layout, header, footer, and two-column structure
+   ========================================================================= */
+
+/* Main Frame Container - Fullscreen Layout with Vertical Centering */
+.pageFrame {
+  background-color: transparent;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* CRITICAL: Row 3 uses minmax to allow shrinking while taking available space */
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: clamp(15px, 2vh, 25px);
+  padding: clamp(25px, 3.5vh, 45px) 
+           clamp(60px, 5vw, 80px);
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrollbar during animations */
+  z-index: 1;
+}
+
+/* =========================================================================
+   Static UI Layer - Background, Step, Close (No Transitions)
+   ========================================================================= */
+
+/* Background Layer - Behind all content */
+.staticUIBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-color: transparent;
+}
+
+/* Header Layer - Above all content (separate stacking context) */
+.staticUIHeader {
+  position: fixed;
+  top: clamp(30px, 4vh, 50px);
+  right: clamp(60px, 5vw, 80px);
+  z-index: 9999; /* Very high z-index to be above all content */
+  pointer-events: none; /* Let children handle their own pointer events */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.staticUIHeader > * {
+  pointer-events: auto; /* Enable pointer events on direct children */
+}
+
+/* =========================================================================
+   Header Section (Step + Close) - Row 2, Aligned Right
+   ========================================================================= */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: absolute;
+  top: clamp(30px, 4vh, 50px);
+  right: clamp(60px, 5vw, 80px);
+  z-index: 100;
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.headerRight {
+  display: flex;
+  gap: clamp(12px, 1.5vw, 20px);
+  position: relative;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  pointer-events: auto; /* Critical: Enable pointer events */
+}
+
+.headerRight > * {
+  pointer-events: auto; /* Critical: Ensure all children can receive clicks */
+}
+
+.step {
+  position: relative;
+  z-index: 101; /* Higher than header z-index to ensure visibility */
+  flex-shrink: 0;
+  pointer-events: auto; /* Explicitly enable pointer events */
+}
+
+.closeButton {
+  position: relative;
+  z-index: 101; /* Higher than header z-index to ensure clickability */
+  flex-shrink: 0;
+  pointer-events: auto; /* Explicitly enable pointer events */
+}
+
+/* =========================================================================
+   Title Section - Row 2
+   ========================================================================= */
+
+.title {
+  grid-area: 2 / 1;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  justify-content: center;
+  line-height: var(--line-height-tight);
+  font-style: normal;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  font-size: clamp(20px, 2.1vw, var(--font-size-display));
+  color: var(--color-text-primary);
+  width: clamp(300px, 60vw, 521px);
+  margin-bottom: clamp(15px, 2vh, 25px);
+}
+
+.title p {
+  margin: 0;
+  line-height: normal;
+}
+
+.titleRegular {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+/* =========================================================================
+   Main Content Area - Row 3 (Two Column Layout)
+   ========================================================================= */
+
+.mainContent {
+  grid-area: 3 / 1;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Give more space to text, less to image */
+  gap: clamp(25px, 3.5vw, 45px);
+  align-items: stretch; /* Stretch both columns to same height */
+  justify-items: start;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrollbar during animations */
+}
+
+/* =========================================================================
+   Image Column (Left)
+   ========================================================================= */
+
+.imageColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%; /* Match text column height */
+  max-height: 100%;
+  min-height: 0; /* Critical: Allows flex to shrink */
+  position: relative;
+  overflow: hidden;
+  padding-right: clamp(10px, 1.5vw, 20px);
+  align-self: stretch; /* Stretch to match text column */
+}
+
+.imageContainer {
+  width: 100%;
+  max-width: 100%;
+  height: 100%; /* Fill the column height */
+  max-height: 100%;
+  aspect-ratio: 833.333 / 775.6; /* Default aspect ratio, can be overridden */
+  position: relative;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+/* =========================================================================
+   Content Column (Right) - Text/Quiz/Results
+   ========================================================================= */
+
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%; /* Match image column height */
+  max-height: 100%;
+  min-height: 0;
+  position: relative;
+  overflow: hidden; /* No scrollbar - text must fit */
+  overflow-x: hidden; /* Prevent horizontal scrollbar during animations */
+  padding-left: clamp(10px, 1.5vw, 20px);
+  align-self: stretch; /* Stretch to match image column */
+}
+
+.contentColumn > * {
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.contentColumnScrollable {
+  overflow-y: auto; /* Allow scrolling for quiz options and results */
+  overflow-x: hidden; /* Prevent horizontal scrollbar during animations */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* =========================================================================
+   Footer Section - Row 4 (Navigation Buttons)
+   ========================================================================= */
+
+.footer {
+  grid-area: 4 / 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+  height: auto;
+  padding-top: clamp(15px, 2vh, 25px);
+}
+
+.footerButton {
+  flex-shrink: 0;
+}
+
+/* =========================================================================
+   Responsive Breakpoints
+   ========================================================================= */
+
+/* Small Screens: 480px - 768px */
+@media (min-width: 480px) and (max-width: 768px) {
+  .pageFrame {
+    gap: clamp(15px, 2vh, 25px);
+    padding: clamp(25px, 3vh, 40px) clamp(40px, 4vw, 60px);
+  }
+
+  .mainContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: clamp(12px, 1.5vw, 15px);
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .imageContainer {
+    max-width: clamp(200px, 60vw, 400px);
+    max-height: clamp(250px, 35vh, 400px);
+    margin: 0 auto;
+  }
+
+  .contentColumn {
+    max-height: 100%;
+  }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pageFrame {
+    gap: clamp(18px, 2.5vh, 28px);
+    padding: clamp(28px, 3.5vh, 45px) clamp(50px, 4.5vw, 70px);
+  }
+
+  .mainContent {
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(12px, 1.5vw, 15px);
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .header {
+    top: clamp(28px, 3.5vh, 45px);
+    right: clamp(50px, 4.5vw, 70px);
+  }
+}
+
+/* Desktop: 1024px - 1366px */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .pageFrame {
+    gap: clamp(20px, 2.5vh, 30px);
+    padding: clamp(30px, 4vh, 50px) clamp(60px, 5vw, 80px);
+  }
+
+  .mainContent {
+    gap: clamp(14px, 1.6vw, var(--gap-large));
+  }
+}
+
+/* Large Desktop: 1366px+ */
+@media (min-width: 1366px) {
+  .pageFrame {
+    gap: 30px;
+    padding: 50px 80px;
+  }
+
+  .mainContent {
+    gap: 50px;
+  }
+}
+
+/* =========================================================================
+   Orientation-Specific Styles
+   ========================================================================= */
+
+/* Landscape orientation - optimize for wider displays */
+@media (orientation: landscape) and (max-height: 600px) {
+  .pageFrame {
+    padding: clamp(12px, 1.5vh, 16px) clamp(30px, 2.5vw, 45px);
+    gap: clamp(8px, 1vw, 12px);
+  }
+
+  .mainContent {
+    min-height: clamp(300px, 80vh, 400px);
+  }
+
+  .contentColumn {
+    max-height: clamp(250px, 70vh, 350px);
+  }
+}
+
+/* =========================================================================
+   High DPI / Touch Device Optimization
+   ========================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch devices - increase button sizes and spacing */
+  .footerButton {
+    min-height: 56px; /* WCAG minimum touch target */
+  }
+}
+
+/* =========================================================================
+   Reduced Motion / Accessibility
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .pageFrame,
+  .footerButton {
+    transition: none;
+  }
+}
+

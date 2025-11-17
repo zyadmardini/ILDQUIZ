@@ -1,0 +1,52 @@
+.button {
+  height: 51px;
+  width: 206px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.icon {
+  position: absolute;
+  aspect-ratio: 546 / 532;
+  left: 74.76%;
+  right: 0;
+  top: 0;
+}
+
+.iconImage {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 50%;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  position: absolute;
+  bottom: 27.45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  right: 32.04%;
+  top: 27.45%;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body-xsmall);
+  line-height: var(--line-height-tight);
+  font-style: normal;
+  color: var(--color-text-primary);
+  white-space: pre;
+}
+
+.text p {
+  line-height: normal;
+  margin: 0;
+}
+

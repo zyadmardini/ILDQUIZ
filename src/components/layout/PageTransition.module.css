@@ -1,0 +1,22 @@
+.pageTransition {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+}
+
+.pageTransition[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pageTransition:not([aria-hidden="true"]) {
+  z-index: 1;
+  background-color: transparent;
+}
+

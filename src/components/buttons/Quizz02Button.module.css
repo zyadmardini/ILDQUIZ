@@ -1,0 +1,71 @@
+.button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 406px;
+  height: 44px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-sm);
+  position: relative;
+}
+
+.default {
+  background-color: var(--color-background-secondary);
+}
+
+.pressed {
+  background-color: var(--color-accent-pressed);
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  background-color: var(--color-background-white);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pressed .checkbox {
+  background-color: var(--color-accent-pressed);
+  border: 2px solid var(--color-background-white);
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  background-color: var(--color-accent-primary);
+  flex-shrink: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body-xsmall);
+  line-height: normal;
+  font-style: normal;
+  color: var(--color-text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.pressed .label {
+  font-weight: var(--font-weight-bold);
+}
+
+.label p {
+  line-height: normal;
+  margin: 0;
+}
+

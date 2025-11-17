@@ -1,0 +1,69 @@
+.button {
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.default {
+  background-color: var(--color-background-primary);
+}
+
+.pressed {
+  background-color: var(--color-background-dark);
+}
+
+.icon {
+  height: 19.5px;
+  position: relative;
+  flex-shrink: 0;
+  width: 22.517px;
+}
+
+.iconImage {
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.iconRotated {
+  flex: none;
+  transform: rotate(180deg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 44px;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-tight);
+  font-style: normal;
+  text-align: right;
+  color: var(--color-text-secondary);
+  width: 164px;
+}
+
+.content p {
+  line-height: normal;
+  margin: 0;
+}
+

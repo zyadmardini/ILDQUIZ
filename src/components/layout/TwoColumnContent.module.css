@@ -1,0 +1,42 @@
+/* =========================================================================
+   TwoColumnContent Component Styles
+   ========================================================================= */
+
+.patientImage {
+  position: absolute;
+  width: 100.05%;
+  height: 167.81%; /* For intro pages - patient image */
+  left: -0.03%;
+  top: -6.71%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+}
+
+/* Scan image variant (for quiz/results pages) */
+.patientImage.scanImage {
+  height: 98.72%;
+  top: 0.17%;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-background-overlay);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.overlayButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin-top: clamp(10px, 1.5vh, 15px);
+  padding-right: 0;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
