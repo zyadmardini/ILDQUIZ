@@ -15,5 +15,26 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  css: {
+    // Ensure CSS variables are preserved in production
+    devSourcemap: true,
+  },
+  build: {
+    // Ensure all CSS is bundled consistently
+    cssCodeSplit: false,
+    // Use esbuild for more reliable CSS minification
+    cssMinify: 'esbuild',
+    rollupOptions: {
+      output: {
+        // Preserve CSS variable names in production
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith('.css')) {
+            return 'assets/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
+  },
 })
 

@@ -14,7 +14,8 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto auto 1fr auto;
+  /* Use minmax(0, 1fr) for main content row to allow shrinking below content size */
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: clamp(10px, 1.5vw, var(--gap-medium));
   padding: clamp(20px, 2.5vh, var(--spacing-lg)) 
            clamp(40px, 3vw, var(--spacing-xl));
@@ -23,6 +24,9 @@
   height: 100vh;
   overflow: hidden;
   z-index: 1;
+  /* Ensure viewport is established before calculations */
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 .frame.transitioning {
@@ -141,7 +145,10 @@
   z-index: 2;
   width: 100%;
   height: 100%;
-  min-height: clamp(400px, 60vh, 700px);
+  /* Critical for grid children to allow shrinking below content size */
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 /* When showing all 4 patients, remove arrow columns */
@@ -189,6 +196,10 @@
   align-items: stretch;
   justify-items: center;
   padding: clamp(10px, 1.5vw, 15px);
+  /* Critical for grid children to allow shrinking */
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 /* When showing all 4 patients, use 4 columns */
@@ -442,14 +453,14 @@
 @media (min-width: 480px) and (max-width: 768px) {
   .frame {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
     gap: clamp(8px, 1vw, 12px);
     padding: clamp(15px, 2vh, 20px) clamp(30px, 2.5vw, 40px);
   }
 
   .carouselContainer {
     gap: clamp(8px, 1vw, 10px);
-    min-height: clamp(350px, 50vh, 500px);
+    min-height: 0;
   }
 
   .patientsGrid {
@@ -476,7 +487,7 @@
 
   .carouselContainer {
     gap: clamp(10px, 1.4vw, 14px);
-    min-height: clamp(400px, 55vh, 600px);
+    min-height: 0;
   }
 
   .patientsGrid {

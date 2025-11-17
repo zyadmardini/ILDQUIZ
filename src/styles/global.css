@@ -1,8 +1,9 @@
 /**
  * Global Styles
+ * 
+ * Note: tokens.css is imported directly in main.tsx to ensure
+ * CSS variables are available before component styles load
  */
-
-@import './tokens.css';
 
 * {
   box-sizing: border-box;
