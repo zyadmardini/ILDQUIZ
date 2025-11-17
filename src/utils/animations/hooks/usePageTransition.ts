@@ -20,7 +20,10 @@ export function usePageTransition(
 ): React.RefObject<HTMLDivElement> {
   const elementRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [_isAnimating, setIsAnimating] = useState(false);
+  // gsap is imported for type annotation only (gsap.core.Tween, gsap.core.Timeline)
+  // Mark as used to satisfy TypeScript's noUnusedLocals
+  void gsap;
   const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null);
 
   const previousIsVisibleRef = useRef(isVisible);

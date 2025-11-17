@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { QuizPageLayout, TwoColumnContent } from '@/components/layout';
 import { PreviousGrey, References } from '@/components/buttons';
 import { SeeTheScan } from '@/components';
@@ -60,7 +60,7 @@ export default function PatientResultsCorrect({
   const resultData = results.correct;
 
   // Page entrance animations
-  const pageRef = useGSAPAnimation((ctx, el) => {
+  const pageRef = useGSAPAnimation((_ctx, el) => {
     if (!el) return;
 
     // Wait for next frame to ensure all refs are ready
@@ -140,7 +140,7 @@ export default function PatientResultsCorrect({
   return (
     <>
       <QuizPageLayout
-        pageRef={pageRef}
+        pageRef={pageRef as React.RefObject<HTMLDivElement>}
         patientId={patientId}
         patientName={config.name}
         currentStep={4}

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAPAnimation, scaleIn } from '@/utils/animations';
 import styles from './Step.module.css';
 import ellipseIcon from '/icons/svg/ellipse-icon.svg';
@@ -34,11 +34,11 @@ export default function Step({
   const disableAnimationRef = useRef(disableAnimation);
   
   // Update ref when prop changes
-  React.useEffect(() => {
+  useEffect(() => {
     disableAnimationRef.current = disableAnimation;
   }, [disableAnimation]);
   
-  const stepRef = useGSAPAnimation((ctx, el) => {
+  const stepRef = useGSAPAnimation((_ctx, el) => {
     // Skip if disabled or already animated
     if (!el || hasAnimatedRef.current || disableAnimationRef.current) return;
     hasAnimatedRef.current = true;
@@ -47,7 +47,7 @@ export default function Step({
 
   return (
     <div
-      ref={stepRef}
+      ref={stepRef as React.RefObject<HTMLDivElement>}
       className={`${styles.step} ${className}`}
       data-name="step"
       data-node-id="6:2095"

@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
+import { useRef, useEffect } from 'react';
 import { useReducedMotion } from '@/utils/animations';
 import { buttonClick, selectionPulse } from '@/utils/animations';
 import styles from './Quizz02Button.module.css';
@@ -33,14 +32,14 @@ export default function Quizz02Button({
   const wasPressedRef = useRef(isPressed);
 
   // Animate selection change
-  React.useEffect(() => {
+  useEffect(() => {
     if (!prefersReducedMotion && buttonRef.current && isPressed && !wasPressedRef.current) {
       selectionPulse(buttonRef.current);
     }
     wasPressedRef.current = isPressed;
   }, [isPressed, prefersReducedMotion]);
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current) {
       buttonClick(buttonRef.current);
     }

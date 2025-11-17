@@ -33,25 +33,19 @@ export type QuizPageLayoutProps = {
  * @param footer - Footer content (buttons, etc.)
  */
 export default function QuizPageLayout({
-  patientId,
+  patientId: _patientId,
   patientName,
-  currentStep,
-  totalSteps,
+  currentStep: _currentStep,
+  totalSteps: _totalSteps,
   title,
-  onClose,
-  onNavigateBack,
+  onClose: _onClose,
+  onNavigateBack: _onNavigateBack,
   children,
   footer,
   className = '',
   'aria-label': ariaLabel,
   pageRef,
 }: QuizPageLayoutProps) {
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    }
-  };
-
   return (
     <div
       ref={pageRef}

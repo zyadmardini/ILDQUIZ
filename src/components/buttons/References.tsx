@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useReducedMotion, buttonHover, buttonHoverOut, buttonClick } from '@/utils/animations';
 import styles from './References.module.css';
 import polygonIcon from '/icons/svg/polygon-icon.svg';
@@ -39,7 +39,7 @@ export default function References({
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current) {
       buttonClick(buttonRef.current);
     }

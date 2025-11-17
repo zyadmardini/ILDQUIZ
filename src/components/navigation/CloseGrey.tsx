@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useReducedMotion, buttonHover, buttonHoverOut, buttonClick, fadeIn } from '@/utils/animations';
 import styles from './CloseGrey.module.css';
 import closeIcon from '/icons/svg/close-icon.svg';
@@ -29,7 +29,7 @@ export default function CloseGrey({
   const prefersReducedMotion = useReducedMotion();
 
   // Entrance animation
-  React.useEffect(() => {
+  useEffect(() => {
     if (!prefersReducedMotion && buttonRef.current) {
       fadeIn(buttonRef.current, { delay: 0.3 });
     }
@@ -47,7 +47,7 @@ export default function CloseGrey({
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current) {
       buttonClick(buttonRef.current);
     }

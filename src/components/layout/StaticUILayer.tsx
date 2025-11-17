@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageBackground } from './';
 import { Step, CloseGrey } from '../navigation';
 import sharedStyles from '@/styles/quiz-page-shared.module.css';
@@ -26,7 +25,7 @@ export default function StaticUILayer({
   currentStep,
   totalSteps = 4,
   onClose,
-  showOnPages = ['quiz-pages'],
+  showOnPages: _showOnPages = ['quiz-pages'],
 }: StaticUILayerProps) {
   const handleClose = () => {
     if (onClose) {

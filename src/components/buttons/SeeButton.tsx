@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useReducedMotion, buttonHover, buttonHoverOut, buttonClick } from '@/utils/animations';
 import styles from './SeeButton.module.css';
 
@@ -44,7 +44,7 @@ export default function SeeButton({
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current && !disabled) {
       buttonClick(buttonRef.current);
     }

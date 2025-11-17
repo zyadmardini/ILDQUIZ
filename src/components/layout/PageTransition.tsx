@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { usePageTransition } from '@/utils/animations';
 import type { TransitionType, PageTransitionOptions } from '@/utils/animations';
 import styles from './PageTransition.module.css';

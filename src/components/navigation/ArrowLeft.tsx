@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useReducedMotion, buttonHover, buttonHoverOut, buttonClick } from '@/utils/animations';
 import styles from './ArrowLeft.module.css';
 
@@ -38,7 +38,7 @@ export default function ArrowLeft({
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current) {
       buttonClick(buttonRef.current);
     }

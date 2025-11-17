@@ -1,7 +1,6 @@
 import { useEffect, useRef, RefObject } from 'react';
 import { gsap } from 'gsap';
 import { useReducedMotion } from './useReducedMotion';
-import { ANIMATION_CONFIG } from '../animationConfig';
 
 /**
  * useGSAPAnimation Hook

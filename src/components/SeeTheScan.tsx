@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './SeeTheScan.module.css';
 import pictureInPictureIcon from '../assets/images/picture-in-picture-icon.png';
 

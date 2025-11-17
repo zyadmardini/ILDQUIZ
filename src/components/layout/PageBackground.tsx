@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './PageBackground.module.css';
 import patientSelectionBg from '@/assets/images/patient-selection-bg.png';
 

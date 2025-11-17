@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useReducedMotion, buttonClick } from '@/utils/animations';
 import styles from './QuizzButton.module.css';
 
@@ -29,7 +29,7 @@ export default function QuizzButton({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_e: React.MouseEvent) => {
     if (!prefersReducedMotion && buttonRef.current) {
       buttonClick(buttonRef.current);
     }

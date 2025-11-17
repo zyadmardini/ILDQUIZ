@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import PatientSelection from './pages/PatientSelection';
 import PatientIntro from './pages/patient/PatientIntro';
 import PatientQuiz from './pages/patient/PatientQuiz';
@@ -27,7 +27,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState<Page>('patient-selection');
   const [resultsPageKey, setResultsPageKey] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [currentPatientId, setCurrentPatientId] = useState<string | null>(null);
+  const [_currentPatientId, setCurrentPatientId] = useState<string | null>(null);
   const previousPageRef = useRef<Page | null>(null);
 
   // Determine transition type based on navigation direction
@@ -41,8 +41,6 @@ function App() {
     }
 
     // Determine if moving forward or backward in flow
-    const pageOrder = ['patient-selection', 'intro', 'quiz', 'results'];
-    
     const getPageOrder = (page: Page): number => {
       if (page === 'patient-selection') return 0;
       if (typeof page === 'object') {
@@ -190,8 +188,7 @@ function App() {
   }, [currentPage]);
 
   // Show static UI layer for all pages except scan-viewer
-  const showStaticUI = currentPage !== 'scan-viewer' && 
-    (currentPage === 'patient-selection' || 
+  const showStaticUI = (currentPage === 'patient-selection' || 
      (typeof currentPage === 'object' && 
       (currentPage.type === 'intro' || currentPage.type === 'quiz' || currentPage.type === 'results')));
 

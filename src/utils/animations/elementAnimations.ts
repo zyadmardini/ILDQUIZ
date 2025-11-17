@@ -209,7 +209,7 @@ export function staggerAnimation(
 
   const tl = gsap.timeline({ delay });
   
-  gsap.utils.toArray(elements).forEach((element, index) => {
+  (gsap.utils.toArray(elements) as gsap.TweenTarget[]).forEach((element, index) => {
     tl.add(animationFn(element), index * stagger);
   });
 

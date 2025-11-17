@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight } from '@/components';
 import { useGSAPAnimation, fadeSlideIn, staggerAnimation } from '@/utils/animations';
 import patientStephanieImage from '../assets/images/patient-stephanie.png';
@@ -59,6 +59,7 @@ const PATIENTS: Patient[] = [
  */
 export type PatientSelectionProps = {
   onPatientSelect?: (patientId: string) => void;
+  onClose?: () => void;
 };
 
 export default function PatientSelection({ 
@@ -128,7 +129,7 @@ export default function PatientSelection({
 
   // Page entrance animations - only on initial mount
   const hasAnimatedRef = useRef(false);
-  const pageRef = useGSAPAnimation((ctx, el) => {
+  const pageRef = useGSAPAnimation((_ctx, el) => {
     if (!el || hasAnimatedRef.current) return;
     hasAnimatedRef.current = true;
 
@@ -199,7 +200,7 @@ export default function PatientSelection({
 
   return (
     <div 
-      ref={pageRef}
+      ref={pageRef as React.RefObject<HTMLDivElement>}
       className={`${styles.frame} ${isTransitioning ? styles.transitioning : ''}`}
       data-node-id="6:2074"
       role="main"

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PageBackground from '@/components/layout/PageBackground';
 import { CloseGrey } from '@/components/navigation';
 import { getPatientConfig } from '@/data/patients';
@@ -38,7 +38,6 @@ export default function PatientScanViewer({
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   // Use refs for drag state and positions to avoid stale closure issues
   const isDraggingRef = useRef(false);
